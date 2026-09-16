@@ -292,7 +292,7 @@ html, body {
 .cover-bg {
   position: absolute; inset: 0;
   background:
-    url('../images/cover-new.jpg?v=2.0') center center / cover no-repeat;
+    url('../images/cover-new.jpg?v=3.0') center center / cover no-repeat;
   z-index: 1;
 }
 
