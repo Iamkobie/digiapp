@@ -1,0 +1,30 @@
+{
+  "name": "digiapp-presentation",
+  "version": "1.0.0",
+  "description": "Responsive interactive mobile app presentation",
+  "main": "index.html",
+  "scripts": {
+    "start": "npx serve .",
+    "serve": "npx serve .",
+    "dev": "npx serve . --port 3000",
+    "deploy": "vercel --prod"
+  },
+  "keywords": [
+    "presentation",
+    "mobile",
+    "responsive",
+    "interactive",
+    "app",
+    "demo"
+  ],
+  "author": "",
+  "license": "MIT",
+  "homepage": ".",
+  "repository": {
+    "type": "git",
+    "url": "."
+  },
+  "engines": {
+    "node": ">=16.0.0"
+  }
+}

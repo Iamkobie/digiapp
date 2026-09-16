@@ -1,0 +1,887 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes, viewport-fit=cover"/>
+  <meta name="theme-color" content="#080a0f"/>
+  <meta name="apple-mobile-web-app-capable" content="yes"/>
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"/>
+  <meta name="apple-mobile-web-app-title" content="DigiApp"/>
+  <meta name="description" content="DigiApp - Interactive mobile app presentation"/>
+  <meta name="robots" content="index, follow"/>
+  <title>DigiApp — Digi Explorer</title>
+  <link rel="stylesheet" href="css/style.css"/>
+</head>
+<body>
+
+<!-- ============================================================
+     OVERVIEW GRID  (Esc)
+     ============================================================ -->
+<div id="overview" role="dialog" aria-label="Section overview" aria-modal="true">
+  <button id="overview-close" aria-label="Close overview">✕</button>
+  <div id="overview-title">SECTION OVERVIEW — click to jump</div>
+  <div id="overview-grid"></div>
+</div>
+
+<!-- Particle canvas -->
+<canvas id="particle-canvas" aria-hidden="true"></canvas>
+
+<!-- ============================================================
+     STAGE
+     ============================================================ -->
+<div id="stage">
+<div id="layout">
+
+  <!-- ══════════════════════════════════════════════════════════
+       LEFT PANEL
+       ══════════════════════════════════════════════════════════ -->
+  <div id="panel-left" class="side-panel" aria-live="polite">
+
+    <!-- cover -->
+    <div class="panel-content" data-panel="cover" data-side="left"></div>
+
+    <!-- rationale -->
+    <div class="panel-content p-scroll" data-panel="rationale" data-side="left">
+      <p class="p-label">Rationale</p>
+      <h2 class="p-title">Why <span class="hl">DigiApp?</span></h2>
+      <p class="p-body">Most Grade&nbsp;6 learners are focused on <span class="hl">games and entertainment</span>. Even skilled smartphone users may not know how to operate educational apps or basic computer tools.</p>
+      <div class="p-divider"></div>
+      <p class="p-body" style="margin-bottom:0">DigiApp bridges the gap — turning entertainment-first habits into <span class="hl">learning-first</span> ones through hands-on exploration.</p>
+    </div>
+
+    <!-- competency -->
+    <div class="panel-content p-scroll" data-panel="competency" data-side="left">
+      <p class="p-label">Learning Competency</p>
+      <h2 class="p-title">What learners will <span class="hl">master</span></h2>
+      <p class="p-body">Develops digital literacy through the <span class="hl">effective, responsible, and safe</span> use of technology — preparing learners to communicate, collaborate, and learn with digital tools.</p>
+      <div class="p-divider"></div>
+      <div class="chip-row">
+        <span class="chip">🔍 Google</span>
+        <span class="chip">📄 Docs</span>
+        <span class="chip">📁 Drive</span>
+        <span class="chip">✉️ Gmail</span>
+      </div>
+    </div>
+
+    <!-- google -->
+    <div class="panel-content p-scroll" data-panel="google" data-side="left">
+      <p class="p-label">Google Search</p>
+      <h2 class="p-title">Exploring <span class="hl">Google</span></h2>
+      <p class="p-body">Google Search is used to find information on the internet. Tap each numbered hotspot on the phone to learn what every part of the Google interface does.</p>
+      <div class="g-card" style="border-left:3px solid var(--gb);">
+        <p style="font-size:11px;font-weight:700;color:var(--gb);letter-spacing:.08em;text-transform:uppercase;margin-bottom:6px;">9 Features to explore</p>
+        <p style="font-size:13px;color:var(--dim);">Search Bar · Mic · Camera · Google Search · I'm Feeling Lucky · Google Logo · Home · AI · More Menu</p>
+      </div>
+    </div>
+
+    <!-- docs -->
+    <div class="panel-content p-scroll" data-panel="docs" data-side="left">
+      <p class="p-label">Google Docs</p>
+      <h2 class="p-title">Exploring <span class="hl">Google Docs</span></h2>
+      <p class="p-body">Google Docs is a free online word processor. Tap each numbered hotspot to learn what every icon and button in the Docs interface does.</p>
+      <div class="g-card" style="border-left:3px solid var(--gb);">
+        <p style="font-size:11px;font-weight:700;color:var(--gb);letter-spacing:.08em;text-transform:uppercase;margin-bottom:6px;">6 Features to explore</p>
+        <p style="font-size:13px;color:var(--dim);">Menu · Search · Folder · Tabs Bar · Document List · Three-dot Menu</p>
+      </div>
+    </div>
+
+    <!-- drive -->
+    <div class="panel-content p-scroll" data-panel="drive" data-side="left">
+      <p class="p-label">Google Drive</p>
+      <h2 class="p-title">Exploring <span class="hl">Google Drive</span></h2>
+      <p class="p-body">Google Drive is an online storage service where you can save, organize, and share files. Tap each hotspot to learn every part of the Drive interface.</p>
+      <div class="g-card" style="border-left:3px solid var(--gy);">
+        <p style="font-size:11px;font-weight:700;color:var(--gy);letter-spacing:.08em;text-transform:uppercase;margin-bottom:6px;">5 Features to explore</p>
+        <p style="font-size:13px;color:var(--dim);">Menu · Search · Profile · File Item · Bottom Navigation</p>
+      </div>
+    </div>
+
+    <!-- gmail -->
+    <div class="panel-content p-scroll" data-panel="gmail" data-side="left">
+      <p class="p-label">Gmail</p>
+      <h2 class="p-title">Exploring <span class="hl">Gmail</span></h2>
+      <p class="p-body">Gmail is Google's free email service. Tap each numbered hotspot to learn every button and feature in the Gmail inbox screen.</p>
+      <div class="g-card" style="border-left:3px solid var(--gr);">
+        <p style="font-size:11px;font-weight:700;color:var(--gr);letter-spacing:.08em;text-transform:uppercase;margin-bottom:6px;">7 Features to explore</p>
+        <p style="font-size:13px;color:var(--dim);">Menu · Search · Profile · Email Item · Compose · Sender Avatar · Star</p>
+      </div>
+    </div>
+
+    <!-- process -->
+    <div class="panel-content p-scroll" data-panel="process" data-side="left">
+      <p class="p-label">Process</p>
+      <h2 class="p-title">Building <span class="hl">Digi Explorer</span></h2>
+      <div class="timeline" id="tl-left">
+        <div class="tl-item" data-delay="0">  <div class="tl-dot"></div><div><div class="tl-num">STEP 01</div><div class="tl-text"><strong>Plan the Content</strong>Identify learning objectives and the 4 Google apps to include.</div></div></div>
+        <div class="tl-item" data-delay="100"><div class="tl-dot"></div><div><div class="tl-num">STEP 02</div><div class="tl-text"><strong>Gather Information</strong>Collect accurate info and screenshots of each app's features.</div></div></div>
+        <div class="tl-item" data-delay="200"><div class="tl-dot"></div><div><div class="tl-num">STEP 03</div><div class="tl-text"><strong>Design the Material</strong>Create the interactive phone interface using Canva.</div></div></div>
+        <div class="tl-item" data-delay="300"><div class="tl-dot"></div><div><div class="tl-num">STEP 04</div><div class="tl-text"><strong>Add Interactive Features</strong>Insert hyperlinks so learners can navigate between apps.</div></div></div>
+      </div>
+    </div>
+
+    <!-- costing -->
+    <div class="panel-content p-scroll" data-panel="costing" data-side="left">
+      <p class="p-label">Costing</p>
+      <h2 class="p-title">Total <span class="hl">investment</span></h2>
+      <div class="g-card" style="text-align:center;margin-bottom:14px;">
+        <div style="font-size:clamp(36px,4vw,54px);font-weight:700;color:var(--accent);font-variant-numeric:tabular-nums;" id="big-total">₱ 0</div>
+        <div style="font-size:13px;color:var(--muted);margin-top:4px;">Total project cost</div>
+      </div>
+      <p class="p-body" style="font-size:13px;margin-bottom:0;">Built entirely with <span class="hl">free or accessible software</span> — Canva, PowerPoint, and Google Apps.</p>
+    </div>
+
+    <!-- storage -->
+    <div class="panel-content p-scroll" data-panel="storage" data-side="left">
+      <p class="p-label">Storage</p>
+      <h2 class="p-title">Keeping it <span class="hl">safe</span></h2>
+      <div class="timeline" id="tl-storage">
+        <div class="tl-item" data-delay="0">  <div class="tl-dot"></div><div><div class="tl-text"><strong>Save the file</strong>Store on a laptop or computer in a dedicated folder.</div></div></div>
+        <div class="tl-item" data-delay="100"><div class="tl-dot"></div><div><div class="tl-text"><strong>Backup copies</strong>Keep backups in Google Drive and on a USB flash drive.</div></div></div>
+        <div class="tl-item" data-delay="200"><div class="tl-dot"></div><div><div class="tl-text"><strong>Check hyperlinks</strong>Verify all links remain functional before every use.</div></div></div>
+      </div>
+    </div>
+
+    <!-- testimonials -->
+    <div class="panel-content p-scroll" data-panel="testimonials" data-side="left">
+      <p class="p-label">Testimonials</p>
+      <h2 class="p-title">Voices from the <span class="hl">classroom</span></h2>
+      <p class="p-body">Feedback from educators and learners who used Digi Explorer during actual lessons.</p>
+    </div>
+
+    <!-- closing -->
+    <div class="panel-content p-scroll" data-panel="closing" data-side="left">
+      <p class="p-label">Thank You</p>
+      <h2 class="p-title">Building <span class="hl">digital</span> citizens,<br>one tap at a time.</h2>
+      <p class="p-body">Digi Explorer helps Grade 6 learners become confident, responsible, and capable with technology.</p>
+      <div class="g-dots" style="justify-content:flex-start;margin-top:14px;">
+        <div class="g-dot"></div><div class="g-dot"></div><div class="g-dot"></div><div class="g-dot"></div>
+      </div>
+    </div>
+
+  </div><!-- /panel-left -->
+
+  <!-- ══════════════════════════════════════════════════════════
+       PHONE COLUMN
+       ══════════════════════════════════════════════════════════ -->
+  <div id="phone-col">
+
+    <!-- cover headline (shown only on cover section) -->
+    <div id="cover-headline">
+      <p class="cover-eyebrow">Grade 6 · Digital Literacy · Philippines</p>
+      <h1 class="cover-big">Guidelines on the<br>Utilization of <span class="w1">Digi</span><span class="w2">App</span></h1>
+      <p class="cover-sub">An interactive instructional material for exploring Google's core apps.</p>
+      <div class="g-dots"><div class="g-dot"></div><div class="g-dot"></div><div class="g-dot"></div><div class="g-dot"></div></div>
+    </div>
+
+    <!-- ── THE PHONE ── -->
+    <div id="phone" role="application" aria-label="Digi Explorer phone">
+
+      <!-- Section dots (side) -->
+      <div id="section-dots" aria-hidden="true"></div>
+
+      <!-- Status bar -->
+      <div id="phone-status">
+        <span>9:41</span>
+        <span id="phone-section-label">Digi Explorer</span>
+        <div class="status-icons"><span>▲</span><span>📶</span><span>🔋</span></div>
+      </div>
+
+      <!-- All phone pages -->
+      <div id="phone-screen">
+
+        <!-- ════════════════════════════════════════════════════
+             PAGE: COVER / SPLASH
+             cover.jpg is the full background — it already contains
+             the DIGI EXPLORER title and team photo.
+             We only render the interactive START button on top.
+             ════════════════════════════════════════════════════ -->
+        <div class="phone-page active" id="page-cover">
+          <!-- Full-screen background image -->
+          <div class="cover-bg"></div>
+          <!-- Only the START button — overlaid on the image's button area -->
+          <div class="cover-content">
+            <button class="start-btn" id="cover-start-btn">START</button>
+          </div>
+        </div>
+
+        <!-- ════════════════════════════════════════════════════
+             PAGE: HOME SCREEN (cyberpunk wallpaper + app icons)
+             ════════════════════════════════════════════════════ -->
+        <div class="phone-page" id="page-home">
+          <div class="home-wallpaper">
+            <!-- SVG neon road perspective lines -->
+            <div class="neon-road">
+              <svg viewBox="0 0 300 320" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+                <!-- Converging road lines to vanishing point -->
+                <line x1="150" y1="0" x2="0"   y2="320" stroke="#ff00ff" stroke-width="1.5" opacity="0.5"/>
+                <line x1="150" y1="0" x2="300" y2="320" stroke="#ff00ff" stroke-width="1.5" opacity="0.5"/>
+                <line x1="150" y1="0" x2="60"  y2="320" stroke="#00d4ff" stroke-width="0.8" opacity="0.3"/>
+                <line x1="150" y1="0" x2="240" y2="320" stroke="#00d4ff" stroke-width="0.8" opacity="0.3"/>
+                <!-- Horizon glow -->
+                <ellipse cx="150" cy="0" rx="80" ry="18" fill="#7b2fff" opacity="0.35"/>
+                <!-- Building silhouettes left -->
+                <rect x="0"   y="60"  width="35" height="260" fill="#0a0020" opacity="0.9"/>
+                <rect x="10"  y="40"  width="20" height="280" fill="#0a0020" opacity="0.9"/>
+                <rect x="28"  y="80"  width="28" height="240" fill="#0a0020" opacity="0.9"/>
+                <!-- Building silhouettes right -->
+                <rect x="265" y="60"  width="35" height="260" fill="#0a0020" opacity="0.9"/>
+                <rect x="272" y="40"  width="20" height="280" fill="#0a0020" opacity="0.9"/>
+                <rect x="248" y="80"  width="28" height="240" fill="#0a0020" opacity="0.9"/>
+                <!-- Neon building lights left -->
+                <rect x="5"  y="65" width="4" height="3" fill="#00d4ff" opacity="0.8"/>
+                <rect x="14" y="50" width="3" height="3" fill="#ff00ff" opacity="0.7"/>
+                <rect x="22" y="90" width="5" height="2" fill="#00d4ff" opacity="0.6"/>
+                <rect x="30" y="85" width="4" height="3" fill="#7b2fff" opacity="0.8"/>
+                <!-- Neon building lights right -->
+                <rect x="269" y="65" width="4" height="3" fill="#00d4ff" opacity="0.8"/>
+                <rect x="278" y="50" width="3" height="3" fill="#ff00ff" opacity="0.7"/>
+                <rect x="258" y="90" width="5" height="2" fill="#00d4ff" opacity="0.6"/>
+                <rect x="263" y="85" width="4" height="3" fill="#7b2fff" opacity="0.8"/>
+              </svg>
+            </div>
+          </div>
+
+          <!-- Weather widget -->
+          <div class="weather-widget">
+            <div class="weather-day"><div class="weather-day-name">MON</div><div class="weather-icon">☀️</div><div class="weather-temp">24°</div></div>
+            <div class="weather-day"><div class="weather-day-name">TUE</div><div class="weather-icon">🌤️</div><div class="weather-temp">22°</div></div>
+            <div class="weather-day"><div class="weather-day-name">WED</div><div class="weather-icon">🌧️</div><div class="weather-temp">19°</div></div>
+            <div class="weather-day"><div class="weather-day-name">THU</div><div class="weather-icon">⛈️</div><div class="weather-temp">20°</div></div>
+          </div>
+
+          <!-- App icons -->
+          <div class="home-apps">
+            <button class="home-app-btn" data-app="google" aria-label="Google Search">
+              <!-- Google G logo in SVG -->
+              <div class="home-app-icon icon-google">
+                <svg width="32" height="32" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
+                  <path fill="#EA4335" d="M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.72 17.74 9.5 24 9.5z"/>
+                  <path fill="#4285F4" d="M46.98 24.55c0-1.57-.15-3.09-.38-4.55H24v9.02h12.94c-.58 2.96-2.26 5.48-4.78 7.18l7.73 6c4.51-4.18 7.09-10.36 7.09-17.65z"/>
+                  <path fill="#FBBC05" d="M10.53 28.59c-.48-1.45-.76-2.99-.76-4.59s.27-3.14.76-4.59l-7.98-6.19C.92 16.46 0 20.12 0 24c0 3.88.92 7.54 2.56 10.78l7.97-6.19z"/>
+                  <path fill="#34A853" d="M24 48c6.48 0 11.93-2.13 15.89-5.81l-7.73-6c-2.18 1.48-4.97 2.31-8.16 2.31-6.26 0-11.57-4.22-13.47-9.91l-7.98 6.19C6.51 42.62 14.62 48 24 48z"/>
+                  <path fill="none" d="M0 0h48v48H0z"/>
+                </svg>
+              </div>
+              <span class="home-app-label">Google</span>
+            </button>
+
+            <button class="home-app-btn" data-app="docs" aria-label="Google Docs">
+              <div class="home-app-icon icon-docs">
+                <svg width="32" height="32" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
+                  <path fill="#4285F4" d="M28 0H8C5.8 0 4 1.8 4 4v40c0 2.2 1.8 4 4 4h32c2.2 0 4-1.8 4-4V16L28 0z"/>
+                  <path fill="#1565C0" d="M32 16h12L28 0v12c0 2.2 1.8 4 4 4z"/>
+                  <path fill="#fff" d="M12 34h24v2H12zm0-6h24v2H12zm0-6h14v2H12z"/>
+                </svg>
+              </div>
+              <span class="home-app-label">Docs</span>
+            </button>
+
+            <button class="home-app-btn" data-app="drive" aria-label="Google Drive">
+              <div class="home-app-icon icon-drive">
+                <svg width="32" height="32" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
+                  <path fill="#FFC107" d="M17.1 6l-11 19.1L0 38.2h14.3L25.3 19z"/>
+                  <path fill="#1976D2" d="M30.9 6H17.1l11 19.1h27.8L30.9 6z"/>
+                  <path fill="#4CAF50" d="M14.3 38.2l6.2-10.7H48l-6.1 10.7z"/>
+                </svg>
+              </div>
+              <span class="home-app-label">Drive</span>
+            </button>
+
+            <button class="home-app-btn" data-app="gmail" aria-label="Gmail">
+              <div class="home-app-icon icon-gmail">
+                <svg width="32" height="32" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
+                  <path fill="#4CAF50" d="M45 16.2l-5 2.75-5 4.75V40h7c1.657 0 3-1.343 3-3V16.2z"/>
+                  <path fill="#1E88E5" d="M3 16.2l3.5 2.75L11 23.7V40H4c-1.657 0-3-1.343-3-3V16.2z"/>
+                  <path fill="#E53935" d="M35 11.2l-11 8.25-11-8.25-1 5.8 1 6.7 11 8.25 11-8.25 1-6.7z"/>
+                  <path fill="#C62828" d="M3 12.298V16.2l8 6.25V11.2L6.at 8.898C5.16 7.338 3 8.088 3 9.798v2.5z" opacity=".1"/>
+                  <path fill="#FBC02D" d="M45 12.298V16.2l-8 6V11.2l4.9-2.322c1.78-1.56 3.1-.81 3.1.9v2.52z"/>
+                  <path fill="#E53935" d="M13 11.2v12.25l11 8.25 11-8.25V11.2L24 19.45z"/>
+                </svg>
+              </div>
+              <span class="home-app-label">Gmail</span>
+            </button>
+          </div>
+
+          <!-- Home bar -->
+          <div style="position:absolute;bottom:10px;left:0;right:0;display:flex;justify-content:center;z-index:10;">
+            <div id="phone-home-dot" style="width:70px;height:4px;background:rgba(255,255,255,0.25);border-radius:4px;"></div>
+          </div>
+        </div>
+
+        <!-- ════════════════════════════════════════════════════
+             PAGE: GOOGLE
+             ════════════════════════════════════════════════════ -->
+        <div class="phone-page" id="page-google">
+          <!-- App top bar -->
+          <div class="app-topbar" style="background:#202124;">
+            <button class="app-topbar-back" data-back="home" aria-label="Back to home">←</button>
+            <span class="app-topbar-title">Google</span>
+            <div class="app-topbar-icon google" style="background:rgba(66,133,244,0.15);">🔍</div>
+          </div>
+
+          <div class="app-split">
+            <!-- Mock screenshot of Google Chrome new tab -->
+            <div class="google-mock app-mock" id="google-mock">
+              <!-- Hotspot overlay -->
+              <div class="hotspot-layer" id="google-hotspots">
+                <!--
+                  Badge numbers match the JS features array exactly:
+                  feat 0 = Search Bar         → badge 1 (centre of search bar row)
+                  feat 1 = Google Search Btn  → badge 2 (left button)
+                  feat 2 = I'm Feeling Lucky  → badge 3 (right button)
+                  feat 3 = Google Logo        → badge 4 (centre top, logo area)
+                  feat 4 = Microphone         → badge 5 (right inside search bar)
+                  feat 5 = Camera / Incognito → badge 6 (far right of search bar)
+                  feat 6 = Home Button        → badge 7 (top-left nav)
+                  feat 7 = AI Button          → badge 8 (top-right, second icon)
+                  feat 8 = More Menu          → badge 9 (top-right, last icon)
+                -->
+                <!-- Row 1: top nav bar icons -->
+                <div class="hotspot badge-orange" data-app="google" data-feat="6" style="left:8%;top:10%;"  aria-label="Feature 7: Home Button">7</div>
+                <div class="hotspot badge-orange" data-app="google" data-feat="7" style="left:83%;top:10%;" aria-label="Feature 8: AI Button">8</div>
+                <div class="hotspot badge-orange" data-app="google" data-feat="8" style="left:94%;top:10%;" aria-label="Feature 9: More Menu">9</div>
+                <!-- Row 2: Google logo -->
+                <div class="hotspot badge-orange" data-app="google" data-feat="3" style="left:50%;top:35%;" aria-label="Feature 4: Google Logo">4</div>
+                <!-- Row 3: search bar -->
+                <div class="hotspot badge-orange" data-app="google" data-feat="0" style="left:35%;top:58%;" aria-label="Feature 1: Search Bar">1</div>
+                <div class="hotspot badge-orange" data-app="google" data-feat="4" style="left:78%;top:58%;" aria-label="Feature 5: Microphone">5</div>
+                <div class="hotspot badge-orange" data-app="google" data-feat="5" style="left:91%;top:58%;" aria-label="Feature 6: Camera">6</div>
+                <!-- Row 4: buttons below search bar -->
+                <div class="hotspot badge-orange" data-app="google" data-feat="1" style="left:28%;top:82%;" aria-label="Feature 2: Google Search">2</div>
+                <div class="hotspot badge-orange" data-app="google" data-feat="2" style="left:72%;top:82%;" aria-label="Feature 3: I'm Feeling Lucky">3</div>
+              </div>
+
+              <!-- Visual mock of Google page -->
+              <div style="background:#202124;width:100%;height:100%;display:flex;flex-direction:column;align-items:center;padding:12px 10px 8px;gap:8px;">
+                <!-- Top nav bar -->
+                <div style="width:100%;display:flex;justify-content:space-between;align-items:center;font-size:9px;color:rgba(255,255,255,0.5);padding:0 4px;">
+                  <span style="font-size:14px;">⌂</span>
+                  <span></span>
+                  <span style="display:flex;gap:6px;"><span>🤖</span><span style="font-size:14px;">⋮</span></span>
+                </div>
+                <!-- Google logo -->
+                <div class="google-logo-text" style="font-size:28px;margin-top:4px;">
+                  <span class="g-blue">G</span><span class="g-red">o</span><span class="g-yellow">o</span><span class="g-blue">g</span><span class="g-green">l</span><span class="g-red">e</span>
+                </div>
+                <!-- Search bar -->
+                <div class="google-search-bar" style="width:100%;">
+                  <span class="gsb-g-icon">
+                    <svg width="13" height="13" viewBox="0 0 48 48"><path fill="#EA4335" d="M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.72 17.74 9.5 24 9.5z"/><path fill="#4285F4" d="M46.98 24.55c0-1.57-.15-3.09-.38-4.55H24v9.02h12.94c-.58 2.96-2.26 5.48-4.78 7.18l7.73 6c4.51-4.18 7.09-10.36 7.09-17.65z"/><path fill="#FBBC05" d="M10.53 28.59c-.48-1.45-.76-2.99-.76-4.59s.27-3.14.76-4.59l-7.98-6.19C.92 16.46 0 20.12 0 24c0 3.88.92 7.54 2.56 10.78l7.97-6.19z"/><path fill="#34A853" d="M24 48c6.48 0 11.93-2.13 15.89-5.81l-7.73-6c-2.18 1.48-4.97 2.31-8.16 2.31-6.26 0-11.57-4.22-13.47-9.91l-7.98 6.19C6.51 42.62 14.62 48 24 48z"/></svg>
+                  </span>
+                  <span style="flex:1;font-size:10px;">Search Google or type a URL</span>
+                  <span style="font-size:12px;">🎤</span>
+                  <span style="font-size:12px;">📷</span>
+                </div>
+                <!-- Buttons -->
+                <div class="google-btns">
+                  <div class="g-btn"><span class="g-btn-icon">🔍</span>Google Search</div>
+                  <div class="g-btn">I'm Feeling Lucky</div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Explanation panel (slides up when hotspot tapped) -->
+            <div class="explain-panel" id="google-explain">
+              <div class="explain-feature-name" id="google-feat-name">Tap a number to explore</div>
+              <div class="explain-text" id="google-feat-text">Each numbered badge on the screen above shows a feature of Google. Tap any badge to learn what it does.</div>
+              <div class="explain-nav" id="google-nav-dots"></div>
+              <div class="explain-arrows">
+                <button class="explain-arrow" id="google-prev" aria-label="Previous feature">←</button>
+                <button class="explain-arrow" id="google-next" aria-label="Next feature">→</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Task screen (hidden until all features seen) -->
+          <div class="task-screen" id="google-task" style="display:none;">
+            <div class="app-icon-big">
+              <svg width="32" height="32" viewBox="0 0 48 48"><path fill="#EA4335" d="M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.72 17.74 9.5 24 9.5z"/><path fill="#4285F4" d="M46.98 24.55c0-1.57-.15-3.09-.38-4.55H24v9.02h12.94c-.58 2.96-2.26 5.48-4.78 7.18l7.73 6c4.51-4.18 7.09-10.36 7.09-17.65z"/><path fill="#FBBC05" d="M10.53 28.59c-.48-1.45-.76-2.99-.76-4.59s.27-3.14.76-4.59l-7.98-6.19C.92 16.46 0 20.12 0 24c0 3.88.92 7.54 2.56 10.78l7.97-6.19z"/><path fill="#34A853" d="M24 48c6.48 0 11.93-2.13 15.89-5.81l-7.73-6c-2.18 1.48-4.97 2.31-8.16 2.31-6.26 0-11.57-4.22-13.47-9.91l-7.98 6.19C6.51 42.62 14.62 48 24 48z"/></svg>
+            </div>
+            <div class="task-label">Task: Google Search</div>
+            <p class="task-question">"How does technology help learning, and what are its negative effects?"</p>
+            <ol class="task-subtasks">
+              <li>1. Open Google in your browser.</li>
+              <li>2. Type the question above in the Search Bar.</li>
+              <li>3. Click <strong>Google Search</strong> or press Enter.</li>
+              <li>4. Read at least <strong>2 results</strong> and write down one positive and one negative effect of technology on learning.</li>
+            </ol>
+            <div class="task-graphic"><span class="task-graphic-icon">🔍</span><div class="task-graphic-line"></div></div>
+            <div class="task-cta">
+              <button class="task-back-btn" data-back-task="google" aria-label="Back to features">←</button>
+              <a class="task-open-link" href="https://www.google.com" target="_blank" rel="noopener" aria-label="Open Google">→</a>
+            </div>
+          </div>
+        </div><!-- /page-google -->
+
+        <!-- ════════════════════════════════════════════════════
+             PAGE: GOOGLE DOCS
+             ════════════════════════════════════════════════════ -->
+        <div class="phone-page" id="page-docs">
+          <div class="app-topbar" style="background:#1f1f2e;">
+            <button class="app-topbar-back" data-back="home" aria-label="Back to home">←</button>
+            <span class="app-topbar-title">Google Docs</span>
+            <div class="app-topbar-icon" style="background:rgba(66,133,244,0.15);">📄</div>
+          </div>
+
+          <div class="app-split">
+            <div class="docs-mock app-mock" id="docs-mock">
+              <div class="hotspot-layer" id="docs-hotspots">
+                <!--
+                  feat 0 = Menu (≡)          → badge 1 — left of topbar
+                  feat 1 = Search Docs        → badge 2 — centre of topbar
+                  feat 2 = Folder Icon        → badge 3 — right of topbar
+                  feat 3 = Tabs (Docs/Sheets) → badge 4 — inside tabs row (moved to 28% so visible)
+                  feat 4 = Document List Item → badge 5 — middle of body list
+                  feat 5 = Three-dot / Plus   → badge 6 — right side of second file row
+                -->
+                <div class="hotspot badge-orange" data-app="docs" data-feat="0" style="left:8%;top:19%;"  aria-label="Feature 1: Menu">1</div>
+                <div class="hotspot badge-orange" data-app="docs" data-feat="1" style="left:50%;top:19%;" aria-label="Feature 2: Search Docs">2</div>
+                <div class="hotspot badge-orange" data-app="docs" data-feat="2" style="left:90%;top:19%;" aria-label="Feature 3: Folder">3</div>
+                <div class="hotspot badge-orange" data-app="docs" data-feat="3" style="left:35%;top:36%;" aria-label="Feature 4: Tabs">4</div>
+                <div class="hotspot badge-orange" data-app="docs" data-feat="4" style="left:50%;top:60%;" aria-label="Feature 5: Document">5</div>
+                <div class="hotspot badge-orange" data-app="docs" data-feat="5" style="left:90%;top:78%;" aria-label="Feature 6: Three-dot">6</div>
+              </div>
+
+              <!-- Docs mock visual -->
+              <div class="docs-topbar-mock">
+                <span style="font-size:14px;color:rgba(255,255,255,0.6);">≡</span>
+                <div class="docs-tab active">📄 Docs</div>
+                <div class="docs-tab">📊 Sheets</div>
+                <div class="docs-tab">📑 Slides</div>
+                <span style="margin-left:auto;font-size:14px;color:rgba(255,255,255,0.5);">📁</span>
+              </div>
+              <div class="docs-body">
+                <div class="docs-sort-row">↓ Last opened by me</div>
+                <div class="docs-file-row">
+                  <span class="docs-file-icon">📄</span>
+                  <div class="docs-file-info">
+                    <div class="docs-file-name">Untitled document</div>
+                    <div class="docs-file-meta">● Opened by me 10:26 AM</div>
+                  </div>
+                  <div class="docs-file-more">⋮</div>
+                </div>
+                <div class="docs-file-row">
+                  <span class="docs-file-icon">📄</span>
+                  <div class="docs-file-info">
+                    <div class="docs-file-name">Speaker 1_Narrative2.0v</div>
+                    <div class="docs-file-meta">● Opened by me Sep 15, 2025</div>
+                  </div>
+                  <div class="docs-file-more">⋮</div>
+                </div>
+              </div>
+              <div class="docs-formatting-bar">
+                <span>B</span><span style="font-style:italic;">I</span><span style="text-decoration:underline;">U</span>
+                <span>A</span><span>🖊️</span><span style="margin-left:auto;">≡</span><span>Aᴬ</span>
+              </div>
+            </div>
+
+            <div class="explain-panel" id="docs-explain">
+              <div class="explain-feature-name" id="docs-feat-name">Tap a number to explore</div>
+              <div class="explain-text" id="docs-feat-text">Each numbered badge shows a feature of Google Docs. Tap any badge to learn what it does.</div>
+              <div class="explain-nav" id="docs-nav-dots"></div>
+              <div class="explain-arrows">
+                <button class="explain-arrow" id="docs-prev" aria-label="Previous">←</button>
+                <button class="explain-arrow" id="docs-next" aria-label="Next">→</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="task-screen" id="docs-task" style="display:none;">
+            <div class="app-icon-big">📄</div>
+            <div class="task-label">Task: Google Docs</div>
+            <p class="task-question">"Type or paste your answer in Google Docs and proceed."</p>
+            <ol class="task-subtasks">
+              <li>1. Open Google Docs and create a <strong>New Document</strong>.</li>
+              <li>2. Type your name, grade, and today's date at the top.</li>
+              <li>3. Write your answer to the Google Search task.</li>
+              <li>4. Use the <strong>Formatting Toolbar</strong> — make your name <strong>Bold</strong>.</li>
+              <li>5. <strong>Share</strong> the document with your teacher's email.</li>
+            </ol>
+            <div class="task-graphic"><span class="task-graphic-icon">📄</span><div class="task-graphic-line"></div></div>
+            <div class="task-cta">
+              <button class="task-back-btn" data-back-task="docs" aria-label="Back">←</button>
+              <a class="task-open-link" href="https://docs.google.com" target="_blank" rel="noopener" style="background:#4285F4;" aria-label="Open Docs">→</a>
+            </div>
+          </div>
+        </div><!-- /page-docs -->
+
+        <!-- ════════════════════════════════════════════════════
+             PAGE: GOOGLE DRIVE
+             ════════════════════════════════════════════════════ -->
+        <div class="phone-page" id="page-drive">
+          <div class="app-topbar" style="background:#1c1c2e;">
+            <button class="app-topbar-back" data-back="home" aria-label="Back">←</button>
+            <span class="app-topbar-title">Google Drive</span>
+            <div class="app-topbar-icon" style="background:rgba(251,188,5,0.15);">📁</div>
+          </div>
+
+          <div class="app-split">
+            <div class="drive-mock app-mock" id="drive-mock">
+              <div class="hotspot-layer" id="drive-hotspots">
+                <!--
+                  feat 0 = Menu (≡)           → badge 1 — left of topbar
+                  feat 1 = Search Drive        → badge 2 — centre of topbar
+                  feat 2 = Profile Icon        → badge 3 — right of topbar
+                  feat 3 = File Item           → badge 4 — right side of file list row
+                  feat 4 = Bottom Nav Bar      → badge 5 — centre of bottom nav (moved from 93% to 88%)
+                -->
+                <div class="hotspot badge-pink" data-app="drive" data-feat="0" style="left:8%;top:17%;"  aria-label="Feature 1: Menu">1</div>
+                <div class="hotspot badge-pink" data-app="drive" data-feat="1" style="left:50%;top:17%;" aria-label="Feature 2: Search Drive">2</div>
+                <div class="hotspot badge-pink" data-app="drive" data-feat="2" style="left:88%;top:17%;" aria-label="Feature 3: Profile">3</div>
+                <div class="hotspot badge-pink" data-app="drive" data-feat="3" style="left:82%;top:58%;" aria-label="Feature 4: File item">4</div>
+                <div class="hotspot badge-pink" data-app="drive" data-feat="4" style="left:50%;top:88%;" aria-label="Feature 5: Bottom nav">5</div>
+              </div>
+
+              <!-- Drive mock visual -->
+              <div class="drive-topbar-mock">
+                <span style="font-size:14px;color:rgba(255,255,255,0.6);">≡</span>
+                <div class="drive-title-mock">Search Drive</div>
+                <div style="width:26px;height:26px;border-radius:50%;background:#EA4335;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;color:#fff;">R</div>
+              </div>
+              <div class="drive-tabs">
+                <div class="drive-tab active">Suggested</div>
+                <div class="drive-tab">Activity</div>
+              </div>
+              <div class="drive-files">
+                <div style="font-size:9px;color:rgba(255,255,255,0.4);padding:4px 0 6px;border-bottom:1px solid rgba(255,255,255,0.06);display:flex;justify-content:space-between;align-items:center;">
+                  <span>Files</span><span>☰ ⊞</span>
+                </div>
+                <div class="drive-file-row">
+                  <div class="drive-file-thumb" style="background:rgba(234,67,53,0.2);">🖼️</div>
+                  <div class="drive-file-info"><div class="drive-file-name">Rafa.jpg</div><div class="drive-file-meta">You opened • Dec 5, 2024</div></div>
+                  <span style="color:rgba(255,255,255,0.3);font-size:12px;">⋮</span>
+                </div>
+                <div class="drive-file-row">
+                  <div class="drive-file-thumb" style="background:rgba(66,133,244,0.2);">📄</div>
+                  <div class="drive-file-info"><div class="drive-file-name">Untitled document</div><div class="drive-file-meta">You opened • Mar 22</div></div>
+                  <span style="color:rgba(255,255,255,0.3);font-size:12px;">⋮</span>
+                </div>
+                <div class="drive-file-row">
+                  <div class="drive-file-thumb" style="background:rgba(251,188,5,0.2);">📊</div>
+                  <div class="drive-file-info"><div class="drive-file-name">Take a look at my Canva design!</div><div class="drive-file-meta">You opened • Dec 1, 2025</div></div>
+                  <span style="color:rgba(255,255,255,0.3);font-size:12px;">⋮</span>
+                </div>
+              </div>
+              <div class="drive-bottom-nav">
+                <div class="drive-nav-item active"><span class="drive-nav-icon">🏠</span>Home</div>
+                <div class="drive-nav-item"><span class="drive-nav-icon">⭐</span>Starred</div>
+                <div class="drive-nav-item"><span class="drive-nav-icon">👥</span>Shared</div>
+                <div class="drive-nav-item"><span class="drive-nav-icon">📁</span>Files</div>
+              </div>
+            </div>
+
+            <div class="explain-panel" id="drive-explain">
+              <div class="explain-feature-name" id="drive-feat-name">Tap a number to explore</div>
+              <div class="explain-text" id="drive-feat-text">Each numbered badge shows a feature of Google Drive. Tap any badge to learn what it does.</div>
+              <div class="explain-nav" id="drive-nav-dots"></div>
+              <div class="explain-arrows">
+                <button class="explain-arrow" id="drive-prev" aria-label="Previous">←</button>
+                <button class="explain-arrow" id="drive-next" aria-label="Next">→</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="task-screen" id="drive-task" style="display:none;">
+            <div class="app-icon-big">📁</div>
+            <div class="task-label">Task: Google Drive</div>
+            <p class="task-question">"Save and organize your work in Google Drive."</p>
+            <ol class="task-subtasks">
+              <li>1. Open Google Drive.</li>
+              <li>2. Create a new <strong>Folder</strong> — name it "Grade 6 – [Your Name]".</li>
+              <li>3. <strong>Upload</strong> any file from your device into that folder.</li>
+              <li>4. <strong>Rename</strong> the uploaded file to "My First Upload".</li>
+            </ol>
+            <div class="task-graphic"><span class="task-graphic-icon">📁</span><div class="task-graphic-line"></div></div>
+            <div class="task-cta">
+              <button class="task-back-btn" data-back-task="drive" aria-label="Back">←</button>
+              <a class="task-open-link" href="https://drive.google.com" target="_blank" rel="noopener" style="background:#FBBC05;color:#000;" aria-label="Open Drive">→</a>
+            </div>
+          </div>
+        </div><!-- /page-drive -->
+
+        <!-- ════════════════════════════════════════════════════
+             PAGE: GMAIL
+             ════════════════════════════════════════════════════ -->
+        <div class="phone-page" id="page-gmail">
+          <div class="app-topbar" style="background:#1e1e1e;">
+            <button class="app-topbar-back" data-back="home" aria-label="Back">←</button>
+            <span class="app-topbar-title">Gmail</span>
+            <div class="app-topbar-icon" style="background:rgba(234,67,53,0.15);">✉️</div>
+          </div>
+
+          <div class="app-split">
+            <div class="gmail-mock app-mock" id="gmail-mock">
+              <div class="hotspot-layer" id="gmail-hotspots">
+                <div class="hotspot badge-purple" data-app="gmail" data-feat="0" style="left:6%;top:18%;"  aria-label="Feature 1: Menu">1</div>
+                <div class="hotspot badge-purple" data-app="gmail" data-feat="1" style="left:50%;top:18%;" aria-label="Feature 2: Search">2</div>
+                <div class="hotspot badge-purple" data-app="gmail" data-feat="2" style="left:90%;top:18%;" aria-label="Feature 3: Profile">3</div>
+                <div class="hotspot badge-purple" data-app="gmail" data-feat="3" style="left:75%;top:42%;" aria-label="Feature 4: Email item">4</div>
+                <div class="hotspot badge-purple" data-app="gmail" data-feat="4" style="left:88%;top:88%;" aria-label="Feature 5: Compose">5</div>
+                <div class="hotspot badge-purple" data-app="gmail" data-feat="5" style="left:8%;top:57%;"  aria-label="Feature 6: Sender avatar">6</div>
+                <div class="hotspot badge-purple" data-app="gmail" data-feat="6" style="left:92%;top:57%;" aria-label="Feature 7: Star">7</div>
+              </div>
+
+              <!-- Gmail mock visual -->
+              <div class="gmail-topbar-mock">
+                <span style="font-size:14px;color:rgba(255,255,255,0.6);">≡</span>
+                <div class="gmail-search-mock">Search in mail</div>
+                <div style="width:26px;height:26px;border-radius:50%;background:#AB47BC;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;color:#fff;">Y</div>
+              </div>
+              <div class="gmail-label-row">Primary</div>
+              <div class="gmail-emails">
+                <div class="gmail-email-row">
+                  <div class="gmail-avatar" style="background:#1565C0;">W</div>
+                  <div class="gmail-email-info">
+                    <div class="gmail-email-sender">Where Winds Meet – NGP</div>
+                    <div class="gmail-email-subject">Claim Exclusive Gifts! New Comp...</div>
+                  </div>
+                  <div class="gmail-email-date">Jul 3</div>
+                  <span style="color:rgba(255,255,255,0.2);font-size:12px;margin-left:4px;">☆</span>
+                </div>
+                <div class="gmail-email-row">
+                  <div class="gmail-avatar" style="background:#2E7D32;">G</div>
+                  <div class="gmail-email-info">
+                    <div class="gmail-email-sender">Google</div>
+                    <div class="gmail-email-subject">You shared some Google Account data</div>
+                  </div>
+                  <div class="gmail-email-date">Jun 16</div>
+                  <span style="color:rgba(255,255,255,0.2);font-size:12px;margin-left:4px;">☆</span>
+                </div>
+                <div class="gmail-email-row">
+                  <div class="gmail-avatar" style="background:#6A1B9A;">N</div>
+                  <div class="gmail-email-info">
+                    <div class="gmail-email-sender">NGP Rewards</div>
+                    <div class="gmail-email-subject">A Gift for Your Return!</div>
+                  </div>
+                  <div class="gmail-email-date">Jun 14</div>
+                  <span style="color:rgba(255,255,255,0.2);font-size:12px;margin-left:4px;">☆</span>
+                </div>
+              </div>
+              <!-- Compose FAB -->
+              <div class="gmail-compose-fab">✏️</div>
+            </div>
+
+            <div class="explain-panel" id="gmail-explain">
+              <div class="explain-feature-name" id="gmail-feat-name">Tap a number to explore</div>
+              <div class="explain-text" id="gmail-feat-text">Each numbered badge shows a feature of Gmail. Tap any badge to learn what it does.</div>
+              <div class="explain-nav" id="gmail-nav-dots"></div>
+              <div class="explain-arrows">
+                <button class="explain-arrow" id="gmail-prev" aria-label="Previous">←</button>
+                <button class="explain-arrow" id="gmail-next" aria-label="Next">→</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="task-screen" id="gmail-task" style="display:none;">
+            <div class="app-icon-big">✉️</div>
+            <div class="task-label">Task: Gmail</div>
+            <p class="task-question">"After saving the document in Google Drive, send it via email using Gmail."</p>
+            <ol class="task-subtasks">
+              <li>1. Open Gmail and tap the <strong>Compose</strong> button (✏️).</li>
+              <li>2. In <strong>To:</strong> type your teacher's email address.</li>
+              <li>3. Subject: <strong>"Digi Explorer – [Your Name]"</strong></li>
+              <li>4. In the body, write 2–3 sentences about what you learned.</li>
+              <li>5. Attach your Google Docs file and press <strong>Send</strong>.</li>
+            </ol>
+            <div class="task-graphic"><span class="task-graphic-icon">✉️</span><div class="task-graphic-line"></div></div>
+            <div class="task-cta">
+              <button class="task-back-btn" data-back-task="gmail" aria-label="Back">←</button>
+              <a class="task-open-link" href="https://mail.google.com" target="_blank" rel="noopener" style="background:#EA4335;" aria-label="Open Gmail">→</a>
+            </div>
+          </div>
+        </div><!-- /page-gmail -->
+
+      </div><!-- /phone-screen -->
+
+      <!-- Phone home bar -->
+      <div id="phone-bar"><div id="phone-home-dot"></div></div>
+
+    </div><!-- /phone -->
+
+    <!-- Section label under phone -->
+    <div id="section-title-bar">
+      <div class="stb-dot"></div>
+      <span id="section-title-text">TAP AN APP TO BEGIN</span>
+    </div>
+
+  </div><!-- /phone-col -->
+
+  <!-- ══════════════════════════════════════════════════════════
+       RIGHT PANEL
+       ══════════════════════════════════════════════════════════ -->
+  <div id="panel-right" class="side-panel" aria-live="polite">
+
+    <!-- cover right: empty -->
+    <div class="panel-content" data-panel="cover" data-side="right"></div>
+
+    <!-- rationale right -->
+    <div class="panel-content" data-panel="rationale" data-side="right">
+      <div class="g-card" style="margin-bottom:12px;border-color:rgba(234,67,53,.25);">
+        <p style="font-size:10px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--gr);margin-bottom:6px;">⚠ The Problem</p>
+        <p style="font-size:13px;color:var(--dim);line-height:1.6;">Grade 6 learners are skilled at entertainment apps but uncertain about educational tools and basic computer skills.</p>
+      </div>
+      <div class="g-card" style="border-color:rgba(52,168,83,.25);">
+        <p style="font-size:10px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--gg);margin-bottom:6px;">✓ The Solution</p>
+        <p style="font-size:13px;color:var(--dim);line-height:1.6;">DigiApp makes learning natural — learners explore real apps the same way they use entertainment apps.</p>
+      </div>
+    </div>
+
+    <!-- competency right -->
+    <div class="panel-content" data-panel="competency" data-side="right">
+      <div class="g-card" style="margin-bottom:12px;">
+        <p style="font-size:11px;font-weight:700;color:var(--accent);margin-bottom:8px;">Curriculum Alignment</p>
+        <p style="font-size:13px;color:var(--dim);line-height:1.6;">Supports DepEd standards — prepares learners to use technology confidently for learning and everyday tasks.</p>
+      </div>
+      <div class="g-card">
+        <p style="font-size:11px;font-weight:700;color:var(--accent);margin-bottom:8px;">Skills Developed</p>
+        <ul style="display:flex;flex-direction:column;gap:7px;">
+          <li style="font-size:12px;color:var(--dim);">🌐 Online communication</li>
+          <li style="font-size:12px;color:var(--dim);">🤝 Digital collaboration</li>
+          <li style="font-size:12px;color:var(--dim);">🛡️ Digital citizenship</li>
+          <li style="font-size:12px;color:var(--dim);">📚 Educational app proficiency</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- google right -->
+    <div class="panel-content p-scroll" data-panel="google" data-side="right">
+      <p class="p-label">How to use</p>
+      <div class="g-card" style="margin-bottom:12px;">
+        <p style="font-size:12px;font-weight:700;color:var(--white);margin-bottom:6px;">Step 1 — Tap a badge</p>
+        <p style="font-size:12px;color:var(--dim);">Orange numbered circles mark each feature. Tap one to see its explanation below the mock screen.</p>
+      </div>
+      <div class="g-card" style="margin-bottom:12px;">
+        <p style="font-size:12px;font-weight:700;color:var(--white);margin-bottom:6px;">Step 2 — Read the explanation</p>
+        <p style="font-size:12px;color:var(--dim);">The teal panel slides up with the feature name and a Grade-6 friendly description.</p>
+      </div>
+      <div class="g-card">
+        <p style="font-size:12px;font-weight:700;color:var(--white);margin-bottom:6px;">Step 3 — Use the arrows</p>
+        <p style="font-size:12px;color:var(--dim);">← → arrows let you move through all 9 features in order. After the last one, the Task appears.</p>
+      </div>
+    </div>
+
+    <!-- docs right -->
+    <div class="panel-content p-scroll" data-panel="docs" data-side="right">
+      <p class="p-label">About Google Docs</p>
+      <div class="g-card" style="margin-bottom:12px;border-color:rgba(66,133,244,.3);">
+        <p style="font-size:22px;margin-bottom:6px;">📄</p>
+        <p style="font-size:13px;font-weight:700;color:var(--white);margin-bottom:4px;">Google Docs</p>
+        <p style="font-size:12px;color:var(--dim);line-height:1.6;">A free online word processing application where you can create, edit, and share documents using the internet.</p>
+      </div>
+      <div class="g-card">
+        <p style="font-size:11px;font-weight:700;color:var(--accent);margin-bottom:8px;">Key Features</p>
+        <ul style="display:flex;flex-direction:column;gap:6px;">
+          <li style="font-size:12px;color:var(--dim);">✏️ Create &amp; edit documents</li>
+          <li style="font-size:12px;color:var(--dim);">☁️ Auto-saves to Google Drive</li>
+          <li style="font-size:12px;color:var(--dim);">👥 Real-time collaboration</li>
+          <li style="font-size:12px;color:var(--dim);">📤 Share with anyone</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- drive right -->
+    <div class="panel-content p-scroll" data-panel="drive" data-side="right">
+      <p class="p-label">About Google Drive</p>
+      <div class="g-card" style="margin-bottom:12px;border-color:rgba(251,188,5,.3);">
+        <p style="font-size:22px;margin-bottom:6px;">📁</p>
+        <p style="font-size:13px;font-weight:700;color:var(--white);margin-bottom:4px;">Google Drive</p>
+        <p style="font-size:12px;color:var(--dim);line-height:1.6;">An online storage service where you can save, organize, and share files — and access them anytime using the internet.</p>
+      </div>
+      <div class="g-card">
+        <p style="font-size:11px;font-weight:700;color:var(--accent);margin-bottom:8px;">Key Features</p>
+        <ul style="display:flex;flex-direction:column;gap:6px;">
+          <li style="font-size:12px;color:var(--dim);">⬆️ Upload &amp; store any file</li>
+          <li style="font-size:12px;color:var(--dim);">📂 Create &amp; organize folders</li>
+          <li style="font-size:12px;color:var(--dim);">🔗 Share files via link</li>
+          <li style="font-size:12px;color:var(--dim);">📱 Access from any device</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- gmail right -->
+    <div class="panel-content p-scroll" data-panel="gmail" data-side="right">
+      <p class="p-label">About Gmail</p>
+      <div class="g-card" style="margin-bottom:12px;border-color:rgba(234,67,53,.3);">
+        <p style="font-size:22px;margin-bottom:6px;">✉️</p>
+        <p style="font-size:13px;font-weight:700;color:var(--white);margin-bottom:4px;">G-Mail</p>
+        <p style="font-size:12px;color:var(--dim);line-height:1.6;">A free email service developed by Google that allows users to send, receive, and manage electronic messages using the internet.</p>
+      </div>
+      <div class="g-card">
+        <p style="font-size:11px;font-weight:700;color:var(--accent);margin-bottom:8px;">Key Features</p>
+        <ul style="display:flex;flex-direction:column;gap:6px;">
+          <li style="font-size:12px;color:var(--dim);">✍️ Compose &amp; send emails</li>
+          <li style="font-size:12px;color:var(--dim);">📎 Attach files &amp; photos</li>
+          <li style="font-size:12px;color:var(--dim);">📥 Organize with labels</li>
+          <li style="font-size:12px;color:var(--dim);">🛡️ Responsible digital communication</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- process right -->
+    <div class="panel-content p-scroll" data-panel="process" data-side="right">
+      <p class="p-label" style="margin-top:20px;">Steps 5–8</p>
+      <div class="timeline" id="tl-right">
+        <div class="tl-item" data-delay="0">  <div class="tl-dot"></div><div><div class="tl-num">STEP 05</div><div class="tl-text"><strong>Create Learning Content</strong>Add explanations and illustrations for every feature.</div></div></div>
+        <div class="tl-item" data-delay="100"><div class="tl-dot"></div><div><div class="tl-num">STEP 06</div><div class="tl-text"><strong>Develop Assessment Tasks</strong>Prepare a short task at the end of each app section.</div></div></div>
+        <div class="tl-item" data-delay="200"><div class="tl-dot"></div><div><div class="tl-num">STEP 07</div><div class="tl-text"><strong>Review and Test</strong>Check all hyperlinks, content, and navigation.</div></div></div>
+        <div class="tl-item" data-delay="300"><div class="tl-dot"></div><div><div class="tl-num">STEP 08</div><div class="tl-text"><strong>Present and Utilize</strong>Use during the lesson — learners explore and complete tasks.</div></div></div>
+      </div>
+    </div>
+
+    <!-- costing right -->
+    <div class="panel-content p-scroll" data-panel="costing" data-side="right">
+      <div class="receipt" id="receipt">
+        <div class="receipt-header"><span>Item</span><span>Amount</span></div>
+        <div id="receipt-rows"></div>
+        <div class="receipt-total">
+          <span class="receipt-total-label">Total</span>
+          <span class="receipt-total-amount" id="receipt-total">₱ 0</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- storage right -->
+    <div class="panel-content p-scroll" data-panel="storage" data-side="right">
+      <p class="p-label">Maintenance</p>
+      <div class="timeline" id="tl-maintenance">
+        <div class="tl-item" data-delay="0">  <div class="tl-dot"></div><div><div class="tl-text"><strong>Update content</strong>Regularly keep information accurate and relevant.</div></div></div>
+        <div class="tl-item" data-delay="100"><div class="tl-dot"></div><div><div class="tl-text"><strong>Check before class</strong>Test all hyperlinks and navigation buttons before use.</div></div></div>
+        <div class="tl-item" data-delay="200"><div class="tl-dot"></div><div><div class="tl-text"><strong>Save after revisions</strong>Always keep a backup after making changes.</div></div></div>
+        <div class="tl-item" data-delay="300"><div class="tl-dot"></div><div><div class="tl-text"><strong>Protect the original</strong>Lock the master copy to prevent accidental edits.</div></div></div>
+      </div>
+    </div>
+
+    <!-- testimonials right -->
+    <div class="panel-content p-scroll" data-panel="testimonials" data-side="right">
+      <div id="testi-grid">
+        <div class="testi-card" data-delay="0">  <div class="testi-mark">"</div><p class="testi-quote" id="tq-0"></p><div><div class="testi-author">Sir Ramil Q.</div><div class="testi-role">Elementary School Teacher</div></div></div>
+        <div class="testi-card" data-delay="200"><div class="testi-mark">"</div><p class="testi-quote" id="tq-1"></p><div><div class="testi-author">Yuan Ken D.</div><div class="testi-role">Grade 6 Student</div></div></div>
+        <div class="testi-card" data-delay="400"><div class="testi-mark">"</div><p class="testi-quote" id="tq-2"></p><div><div class="testi-author">Mrs. Shella V.</div><div class="testi-role">Elementary School Teacher</div></div></div>
+      </div>
+    </div>
+
+    <!-- closing right -->
+    <div class="panel-content p-scroll" data-panel="closing" data-side="right">
+      <div style="display:flex;flex-direction:column;gap:10px;">
+        <div class="g-card" style="border-color:rgba(66,133,244,.3);"><div style="font-size:20px;margin-bottom:4px;">🔍</div><div style="font-size:13px;font-weight:700;color:var(--white);">Google Search</div><div style="font-size:11px;color:var(--muted);">Find, evaluate, and use information</div></div>
+        <div class="g-card" style="border-color:rgba(66,133,244,.3);"><div style="font-size:20px;margin-bottom:4px;">📄</div><div style="font-size:13px;font-weight:700;color:var(--white);">Google Docs</div><div style="font-size:11px;color:var(--muted);">Create, write, and collaborate</div></div>
+        <div class="g-card" style="border-color:rgba(251,188,5,.3);"><div style="font-size:20px;margin-bottom:4px;">📁</div><div style="font-size:13px;font-weight:700;color:var(--white);">Google Drive</div><div style="font-size:11px;color:var(--muted);">Organize, store, and share</div></div>
+        <div class="g-card" style="border-color:rgba(234,67,53,.3);"><div style="font-size:20px;margin-bottom:4px;">✉️</div><div style="font-size:13px;font-weight:700;color:var(--white);">Gmail</div><div style="font-size:11px;color:var(--muted);">Communicate safely and responsibly</div></div>
+      </div>
+    </div>
+
+  </div><!-- /panel-right -->
+
+</div><!-- /layout -->
+</div><!-- /stage -->
+
+<!-- Persistent UI -->
+<div id="progress-bar" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
+<div id="slide-counter" aria-live="polite">1 / 12</div>
+<div id="keyboard-hint">← → SPACE to navigate &nbsp;·&nbsp; ESC for overview</div>
+<button id="nav-prev" aria-label="Previous section">&#8592;</button>
+<button id="nav-next" aria-label="Next section">&#8594;</button>
+
+<script src="js/presentation.js"></script>
+</body>
+</html>
