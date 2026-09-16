@@ -895,266 +895,123 @@
 
 })();
 /* ============================================================
-   🎨 CREATIVE MOBILE ENHANCEMENTS
-   Mobile-specific interactions and gestures
+   📱 STUDENT-FRIENDLY MOBILE INTERACTIONS
+   Simple, clean interactions for educational use
    ============================================================ */
 
-// Mobile detection and touch handling
+// Simple mobile detection
 const isMobile = window.innerWidth <= 768;
-const isTouch = 'ontouchstart' in window;
 
-// Add mobile-specific interactions when document is ready
+// Add student-friendly mobile enhancements
 document.addEventListener('DOMContentLoaded', function() {
   if (isMobile) {
-    initMobileEnhancements();
+    initStudentMobileMode();
   }
 });
 
-function initMobileEnhancements() {
-  // Add swipe gestures for navigation
-  addSwipeNavigation();
+function initStudentMobileMode() {
+  // Add simple touch feedback
+  addSimpleTouchFeedback();
   
-  // Enhance panel interactions
-  enhancePanelInteractions();
+  // Show all panels by default on mobile (no hiding/sliding)
+  showAllPanelsOnMobile();
   
-  // Add pull-to-refresh on cover
-  addPullToRefresh();
-  
-  // Add haptic feedback (if supported)
-  addHapticFeedback();
+  // Add simple swipe navigation (left/right only)
+  addSimpleSwipeNavigation();
 }
 
-function addSwipeNavigation() {
-  let startX, startY, startTime;
+function showAllPanelsOnMobile() {
+  // Make sure panels are visible and positioned properly for students
+  const panels = document.querySelectorAll('.side-panel');
+  panels.forEach(panel => {
+    panel.classList.add('visible');
+    panel.style.position = 'static';
+    panel.style.transform = 'none';
+    panel.style.opacity = '1';
+  });
+}
+
+function addSimpleTouchFeedback() {
+  // Simple visual feedback for touches (no vibration to avoid distraction)
+  document.addEventListener('touchstart', function(e) {
+    const target = e.target.closest('.hotspot, .start-btn, button');
+    if (target) {
+      target.style.transform = target.style.transform.replace('scale(1)', 'scale(0.95)');
+    }
+  }, {passive: true});
+  
+  document.addEventListener('touchend', function(e) {
+    const target = e.target.closest('.hotspot, .start-btn, button');
+    if (target) {
+      setTimeout(() => {
+        target.style.transform = target.style.transform.replace('scale(0.95)', 'scale(1)');
+      }, 150);
+    }
+  }, {passive: true});
+}
+
+function addSimpleSwipeNavigation() {
+  let startX, startTime;
   
   document.addEventListener('touchstart', function(e) {
     startX = e.touches[0].clientX;
-    startY = e.touches[0].clientY;
     startTime = Date.now();
   }, {passive: true});
   
   document.addEventListener('touchend', function(e) {
-    if (!startX || !startY) return;
+    if (!startX) return;
     
     const endX = e.changedTouches[0].clientX;
-    const endY = e.changedTouches[0].clientY;
     const deltaX = endX - startX;
-    const deltaY = endY - startY;
     const deltaTime = Date.now() - startTime;
     
-    // Only consider quick swipes
-    if (deltaTime > 300) return;
+    // Only consider quick swipes (not slow drags)
+    if (deltaTime > 300 || Math.abs(deltaX) < 80) return;
     
-    // Horizontal swipe for navigation
-    if (Math.abs(deltaX) > Math.abs(deltaY) && Math.abs(deltaX) > 50) {
-      if (deltaX > 0) {
-        // Swipe right - go to previous slide
-        previousSlide();
-      } else {
-        // Swipe left - go to next slide
-        nextSlide();
-      }
+    // Simple left/right navigation
+    if (deltaX > 0) {
+      // Swipe right - previous slide
+      if (typeof previousSlide === 'function') previousSlide();
+    } else {
+      // Swipe left - next slide  
+      if (typeof nextSlide === 'function') nextSlide();
     }
     
-    // Vertical swipe up to show panels
-    if (deltaY < -100 && Math.abs(deltaX) < 50) {
-      showMobilePanels();
-    }
+    startX = null;
   }, {passive: true});
 }
 
-function enhancePanelInteractions() {
-  const panels = document.querySelectorAll('.side-panel');
-  
-  panels.forEach(panel => {
-    // Add touch area for easier dragging
-    const handle = document.createElement('div');
-    handle.className = 'mobile-panel-handle';
-    handle.style.cssText = `
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      height: 40px;
-      cursor: grab;
-      z-index: 10;
-    `;
-    panel.prepend(handle);
-    
-    // Add drag to dismiss
-    let startY, currentY, isDragging = false;
-    
-    handle.addEventListener('touchstart', function(e) {
-      startY = e.touches[0].clientY;
-      isDragging = true;
-      panel.style.transition = 'none';
-    }, {passive: true});
-    
-    document.addEventListener('touchmove', function(e) {
-      if (!isDragging) return;
+// Remove complex animations that can confuse students
+function simplifyForStudents() {
+  // Remove floating animations
+  const style = document.createElement('style');
+  style.textContent = `
+    @media (max-width: 768px) {
+      /* Remove distracting animations */
+      * {
+        animation: none !important;
+        transition-duration: 0.3s !important;
+      }
       
-      currentY = e.touches[0].clientY;
-      const deltaY = currentY - startY;
+      /* Keep only essential transitions */
+      .hotspot, .start-btn {
+        transition: transform 0.2s ease, background-color 0.2s ease !important;
+      }
       
-      // Only allow downward dragging
-      if (deltaY > 0) {
-        panel.style.transform = `translateY(${deltaY}px)`;
+      /* Ensure text is always readable */
+      .cover-big, .cover-sub {
+        text-shadow: none !important;
+        color: #1e293b !important;
       }
-    }, {passive: true});
-    
-    document.addEventListener('touchend', function() {
-      if (!isDragging) return;
-      isDragging = false;
       
-      panel.style.transition = '';
-      const deltaY = currentY - startY;
-      
-      // Dismiss if dragged down significantly
-      if (deltaY > 100) {
-        hidePanel(panel);
-      } else {
-        panel.style.transform = 'translateY(0)';
-      }
-    });
-  });
+      .cover-big .w1 { color: #4285F4 !important; }
+      .cover-big .w2 { color: #dc2626 !important; }
+    }
+  `;
+  document.head.appendChild(style);
 }
 
-function addPullToRefresh() {
-  // Add subtle pull-to-refresh on the cover screen
-  const cover = document.querySelector('[data-section="cover"]');
-  if (!cover) return;
-  
-  let startY, refreshing = false;
-  
-  cover.addEventListener('touchstart', function(e) {
-    if (window.scrollY === 0) {
-      startY = e.touches[0].clientY;
-    }
-  }, {passive: true});
-  
-  cover.addEventListener('touchmove', function(e) {
-    if (refreshing || window.scrollY > 0 || !startY) return;
-    
-    const currentY = e.touches[0].clientY;
-    const pullDistance = currentY - startY;
-    
-    if (pullDistance > 0 && pullDistance < 150) {
-      // Add subtle visual feedback
-      const opacity = Math.min(pullDistance / 100, 0.3);
-      cover.style.background = `radial-gradient(ellipse at top, rgba(66,133,244,${opacity}) 0%, transparent 70%)`;
-    }
-  }, {passive: true});
-  
-  cover.addEventListener('touchend', function() {
-    startY = null;
-    cover.style.background = '';
-  });
+// Initialize simplifications
+if (isMobile) {
+  simplifyForStudents();
 }
-
-function addHapticFeedback() {
-  // Add subtle vibration on interactions (if supported)
-  function vibrate(pattern = [10]) {
-    if (navigator.vibrate) {
-      navigator.vibrate(pattern);
-    }
-  }
-  
-  // Vibrate on hotspot clicks
-  document.addEventListener('click', function(e) {
-    if (e.target.closest('.hotspot')) {
-      vibrate([15]);
-    }
-    
-    if (e.target.closest('.start-btn')) {
-      vibrate([25, 10, 15]);
-    }
-  });
-  
-  // Vibrate on navigation
-  document.addEventListener('keydown', function(e) {
-    if (['ArrowLeft', 'ArrowRight', ' '].includes(e.key)) {
-      vibrate([8]);
-    }
-  });
-}
-
-function showMobilePanels() {
-  // Smart panel showing based on current section
-  const currentSection = getCurrentSection();
-  const leftPanel = document.getElementById('panel-left');
-  const rightPanel = document.getElementById('panel-right');
-  
-  // Show relevant panel based on content
-  if (currentSection && currentSection !== 'cover') {
-    if (leftPanel) leftPanel.classList.add('visible');
-  }
-}
-
-function hidePanel(panel) {
-  panel.classList.remove('visible');
-}
-
-// Enhanced mobile animations
-function addMobileAnimations() {
-  // Add intersection observer for scroll-triggered animations
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add('animate-in');
-      }
-    });
-  }, {threshold: 0.1});
-  
-  // Observe key elements
-  document.querySelectorAll('.hotspot, #phone, .side-panel').forEach(el => {
-    observer.observe(el);
-  });
-}
-
-// Initialize mobile animations when DOM is ready
-if (document.readyState === 'loading') {
-  document.addEventListener('DOMContentLoaded', addMobileAnimations);
-} else {
-  addMobileAnimations();
-}
-
-// Add CSS classes for mobile animations
-const mobileStyles = document.createElement('style');
-mobileStyles.textContent = `
-  @media (max-width: 768px) {
-    .hotspot {
-      opacity: 0;
-      transform: translate(-50%, -50%) scale(0.5);
-      transition: all 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
-    }
-    
-    .hotspot.animate-in {
-      opacity: 1;
-      transform: translate(-50%, -50%) scale(1);
-    }
-    
-    .hotspot:nth-child(odd) {
-      animation-delay: 0.1s;
-    }
-    
-    .hotspot:nth-child(even) {
-      animation-delay: 0.2s;
-    }
-    
-    #phone.animate-in {
-      animation: phoneSlideIn 1s cubic-bezier(0.34, 1.56, 0.64, 1);
-    }
-    
-    @keyframes phoneSlideIn {
-      0% {
-        opacity: 0;
-        transform: translateY(50px) scale(0.9);
-      }
-      100% {
-        opacity: 1;
-        transform: translateY(0) scale(1);
-      }
-    }
-  }
-`;
-document.head.appendChild(mobileStyles);
